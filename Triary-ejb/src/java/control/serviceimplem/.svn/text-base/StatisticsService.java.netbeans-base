@@ -1,0 +1,34 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package control.serviceimplem;
+
+import com.googlecode.jtype.Generic;
+import control.IStatisticsService;
+import model.Statistics;
+
+/**
+ *
+ * @author kate
+ */
+public class StatisticsService extends Generic<Statistics> implements IStatisticsService{
+
+    @Override
+    public Statistics getByWeight() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Statistics getByMuscleGr() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Statistics getByExercise() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+   
+    
+}

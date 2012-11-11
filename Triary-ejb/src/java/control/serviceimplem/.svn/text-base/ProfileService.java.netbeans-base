@@ -1,0 +1,42 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package control.serviceimplem;
+import com.googlecode.jtype.Generic;
+import control.IProfileService;
+import javax.persistence.EntityManager;
+import model.Profile;
+import model.Users;
+/**
+ *
+ * @author aliona
+ */
+public class ProfileService extends Generic<Profile> implements IProfileService{
+
+    @Override
+    public Profile getByUser(Users usr) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void manageSettings() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void addParameters() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void viewStatistics() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void addAddons() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+}

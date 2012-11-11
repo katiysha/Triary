@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/tpps2012-sportportal/!svn/ver/13/Triary/Triary-ejb/src/java/control
+END
+ICommentService.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/tpps2012-sportportal/!svn/ver/20/Triary/Triary-ejb/src/java/control/ICommentService.java
+END
+IGeneric.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/tpps2012-sportportal/!svn/ver/23/Triary/Triary-ejb/src/java/control/IGeneric.java
+END
+IDiaryService.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/tpps2012-sportportal/!svn/ver/23/Triary/Triary-ejb/src/java/control/IDiaryService.java
+END
+IStatisticsService.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/tpps2012-sportportal/!svn/ver/20/Triary/Triary-ejb/src/java/control/IStatisticsService.java
+END
+IDietService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/tpps2012-sportportal/!svn/ver/10/Triary/Triary-ejb/src/java/control/IDietService.java
+END
+IProfileService.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/tpps2012-sportportal/!svn/ver/20/Triary/Triary-ejb/src/java/control/IProfileService.java
+END
+IPublicationService.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/tpps2012-sportportal/!svn/ver/11/Triary/Triary-ejb/src/java/control/IPublicationService.java
+END
+IAdministratorService.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/tpps2012-sportportal/!svn/ver/8/Triary/Triary-ejb/src/java/control/IAdministratorService.java
+END
+IUserService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/tpps2012-sportportal/!svn/ver/20/Triary/Triary-ejb/src/java/control/IUserService.java
+END
