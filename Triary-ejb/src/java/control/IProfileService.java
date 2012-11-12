@@ -15,12 +15,13 @@ public interface IProfileService {
     
     public Profile getByUser(Users usr);
     
-    public void manageSettings();
+    public void manageSettings(String new_name, String new_surname, String new_login, String new_password );
+         
+    public void addDiet(String diet, Profile profile);
     
-    public void addParameters();
-    
-    public void viewStatistics();
-    
-    public void addAddons();
-   
+     public void addOwnMethod(String metod, Profile profile);
+  
+     public void enabledDiary(Boolean enDiary);
+     
+     public void enabledStatistic(Boolean enStatistic);
 }
