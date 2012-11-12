@@ -17,8 +17,11 @@ import model.baseclass.BaseEntity;
 @Table(name = "diary", catalog = "profile", schema = "")
 @NamedQueries({
    @NamedQuery(name = "Profile.findById", query = "SELECT p FROM Profile p WHERE id = :id"),
-   @NamedQuery(name = "Profile.getByUser", query = "SELECT p FROM Profile p WHERE owner = :owner")
-   
+   @NamedQuery(name = "Profile.getByUser", query = "SELECT p FROM Profile p WHERE owner = :owner"),
+   @NamedQuery(name ="Profile.getByDiaryEnabled", query = "SELECT p.diary_enabled FROM Profile p WHERE p.owner_id = :id_users"),
+   @NamedQuery(name ="Profile.getByStatisticsEn", query = "SELECT p.stat_enabled FROM Profile p WHERE p.owner_id = :id_users"),
+   @NamedQuery(name = "Profile.updateDiaryEnabled", query = "UPDATE Profile p SET p.diary_enabled = :diary_enabled WHERE p.owner_id = :id_users"),
+   @NamedQuery(name = "Profile.updateStatisticsEn", query = "UPDATE Profile p SET p.stat_enabled = :stat_enabled WHERE p.owner_id = :id_users"),
 })
 @Entity
 @XmlRootElement
