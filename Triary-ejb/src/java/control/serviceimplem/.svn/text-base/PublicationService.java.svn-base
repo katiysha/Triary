@@ -16,34 +16,45 @@ import model.Users;
 public class PublicationService extends Generic<Publication> implements IPublicationService {
 
 
+    @PersistenceContext(unitName = "Triary-ejbPU")
+    private EntityManager em;
+
+    public PublicationService() {
+        super(Publication.class);
+    }
+    
+    public void persist(Object object) {
+        em.persist(object);
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
     @Override
     public List<Publication> findByText(String substr) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (List<Publication>) em.createNamedQuery("Comment.findByText").setParameter("text", substr).getResultList();
     }
 
     @Override
     public List<Publication> findByDate(String date) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (List<Publication>) em.createNamedQuery("Comment.findByDate").setParameter("date", date).getResultList();
     }
 
     @Override
     public List<Publication> getByTitle(String title) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (List<Publication>) em.createNamedQuery("Comment.findByTitle").setParameter("title", title).getResultList();
     }
 
     @Override
-    public List<Publication> getByOrderDate(String type) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<Publication> getByType(String type) {
+        return (List<Publication>) em.createNamedQuery("Comment.findByType").setParameter("type", type).getResultList();
     }
 
     @Override
     public List<Publication> getByAutor(Users usr) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<Publication> getByTypeDate(String type) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (List<Publication>) em.createNamedQuery("Comment.findByAutor").setParameter("user", usr).getResultList();
     }
     
 }

@@ -6,6 +6,9 @@ package control.serviceimplem;
 
 import control.IPublicationService;
 import java.util.List;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Comment;
@@ -15,6 +18,9 @@ import model.Users;
  *
  * @author aliona
  */
+
+@LocalBean
+@Stateless(name="PublicationService")
 public class PublicationService extends Generic<Publication> implements IPublicationService {
 
 
@@ -36,27 +42,32 @@ public class PublicationService extends Generic<Publication> implements IPublica
 
     @Override
     public List<Publication> findByText(String substr) {
-        return (List<Publication>) em.createNamedQuery("Comment.findByText").setParameter("text", substr).getResultList();
+        return (List<Publication>) em.createNamedQuery("Publication.findByText").setParameter("text", substr).getResultList();
     }
 
     @Override
     public List<Publication> findByDate(String date) {
-        return (List<Publication>) em.createNamedQuery("Comment.findByDate").setParameter("date", date).getResultList();
+        return (List<Publication>) em.createNamedQuery("Publication.findByDate").setParameter("date", date).getResultList();
     }
 
     @Override
     public List<Publication> getByTitle(String title) {
-        return (List<Publication>) em.createNamedQuery("Comment.findByTitle").setParameter("title", title).getResultList();
+        return (List<Publication>) em.createNamedQuery("Publication.findByTitle").setParameter("title", title).getResultList();
     }
 
     @Override
     public List<Publication> getByType(String type) {
-        return (List<Publication>) em.createNamedQuery("Comment.findByType").setParameter("type", type).getResultList();
+        return (List<Publication>) em.createNamedQuery("Publication.findByType").setParameter("type", type).getResultList();
     }
 
     @Override
     public List<Publication> getByAutor(Users usr) {
-        return (List<Publication>) em.createNamedQuery("Comment.findByAutor").setParameter("user", usr).getResultList();
+        return (List<Publication>) em.createNamedQuery("Publication.findByAutor").setParameter("user", usr).getResultList();
+    }
+
+    @Override
+    public List<Publication> getAll() {
+        return (List<Publication>) em.createNamedQuery("Publication.findAll").getResultList();
     }
     
 }

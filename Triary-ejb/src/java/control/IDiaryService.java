@@ -14,9 +14,10 @@ import model.Users;
  * @author kate
  */
 public interface IDiaryService {
-    
+    public List<String> getMuscleGroup();
+public List <String> getTask();
     public String selectTrainingType(Integer index);
-    
+     public String selectFealings(Integer index);
     public String selectMuscleGroup(Integer index);
     
     public String selectTask(Integer index);
@@ -27,6 +28,6 @@ public interface IDiaryService {
     
     public void addFilings(Diary diary, String filings);
     
-    public void addRecord(Users usr,String training_type, String muscle_gr,  String tasks, Time tr_duration, Integer repeat_amount, String fillings);
+    public void addRecord(Users usr,String training_type, String muscle_gr,  String tasks, String tr_duration, Integer repeat_amount, String fillings);
     
 }

@@ -15,6 +15,7 @@ public interface ICommentService {
     public List<Comment> getByPublication(Publication publ);
     
     public List<Comment> getByDiary(Diary diary);
+    public List<Comment> getAll();
     
     public boolean addComment (Comment com, Publication pub, Users usr);
  

@@ -4,8 +4,12 @@
  */
 package control.serviceimplem;
 
-import com.googlecode.jtype.Generic;
+
 import control.IStatisticsService;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import model.Publication;
 import model.Statistics;
 
 /**
@@ -14,19 +18,35 @@ import model.Statistics;
  */
 public class StatisticsService extends Generic<Statistics> implements IStatisticsService{
 
-    @Override
-    public Statistics getByWeight() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    @PersistenceContext(unitName = "Triary-ejbPU")
+    private EntityManager em;
+
+    public StatisticsService() {
+        super(Statistics.class);
+    }
+    
+    public void persist(Object object) {
+        em.persist(object);
     }
 
     @Override
-    public Statistics getByMuscleGr() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+    
+    @Override
+    public Statistics getByWeight(String weight) {
+        return (Statistics) em.createNamedQuery("Statistics.getByWeight").setParameter("weight", weight).getResultList();
     }
 
     @Override
-    public Statistics getByExercise() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Statistics getByMuscleGr(String muscle_gr) {
+        return (Statistics) em.createNamedQuery("Statistics.getByMuscleGr").setParameter("muscle_gr", muscle_gr).getResultList();
+    }
+
+    @Override
+    public Statistics getByExercise(String ex) {
+        return (Statistics) em.createNamedQuery("Statistics.getByExercise").setParameter("ex", ex).getResultList();
     }
 
    

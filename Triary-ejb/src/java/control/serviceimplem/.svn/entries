@@ -1,14 +1,14 @@
 10
 
 dir
-15
+37
 http://svn.stu.cn.ua/svn/tpps2012-sportportal/Triary/Triary-ejb/src/java/control/serviceimplem
 http://svn.stu.cn.ua/svn/tpps2012-sportportal
 
 
 
-2012-10-06T14:14:12.136436Z
-13
+2012-10-17T10:33:26.842605Z
+35
 moroz_Aliona
 
 
@@ -28,7 +28,7 @@ b3f8b937-90fd-e111-86e1-0025221b8147
 
 CommentService.java
 file
-21
+
 
 
 
@@ -62,22 +62,18 @@ katiysha
 
 DiaryService.java
 file
-22
-
-
-
-2012-10-10T18:41:49.000000Z
-e3b7fbbce6ba62e5f46fefcda13375e0
-2012-10-10T18:39:21.058021Z
-22
-katiysha
 
 
 
 
+2012-11-11T17:09:06.000000Z
+bb2708301ec0f76f13d0c1329f245926
+2012-10-17T10:33:26.842605Z
+35
+moroz_Aliona
 
 
-
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -92,11 +88,15 @@ katiysha
 
 
 
-2515
+
+
+
+
+2403
 
 Generic.java
 file
-22
+
 
 
 
@@ -134,102 +134,40 @@ file
 
 
 
-2012-10-09T09:40:37.712860Z
-592205484d4c9560c4b5af443427083b
-2012-10-06T14:14:12.136436Z
-13
+
+9184dcbc53844e2491b7095006ee1e52
+2012-10-17T09:23:30.445995Z
+34
 moroz_Aliona
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1035
-
-PublicationServic.java
-file
-18
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-deleted
+svn:special svn:externals svn:needs-lock
 
 PublicationService.java
 file
-18
-
-
-
-2012-10-09T09:40:37.000000Z
-f792b19e3a7a23d5802c435376078e2b
-2012-10-09T10:22:32.909799Z
-18
-katiysha
 
 
 
 
 
+09ace69cfa960751deb072e51c676df2
+2012-10-17T09:12:02.350895Z
+33
+moroz_Aliona
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1334
+svn:special svn:externals svn:needs-lock
 
 StatisticsService.java
 file
-19
+38
 
 
 
-2012-10-09T10:19:38.000000Z
-f0abeba46068655a79451587a5387fd0
-2012-10-09T10:22:56.408817Z
-19
+2012-10-10T20:25:52.000000Z
+295c58a81f0928acea40dffc00a549c5
+2012-11-11T17:22:07.594013Z
+38
 katiysha
 
 
@@ -252,11 +190,11 @@ katiysha
 
 
 
-753
+1372
 
 UserService.java
 file
-19
+
 
 
 
