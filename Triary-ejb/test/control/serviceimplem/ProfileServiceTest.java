@@ -4,217 +4,105 @@
  */
 package control.serviceimplem;
 
+import controller.ProfileController;
 import java.util.Calendar;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.persistence.EntityManager;
 import model.*;
 import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 /**
  *
  * @author kate
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ProfileServiceTest {
-    
-    public List<Publication> publ;
-    public List<Comment> comm;
-    public List<Users> users;
-    public List<Diary> diaries;
-    public List<Statistics> stats;
-    public List<Profile> profiles;
+  //  private Users usr;
+     @Mock
+    private Profile profile;
+      @Mock
+    private Users user;
+    @Mock
+    private List<String> mockedProfile;
+    @Mock
+    private String mProfile;
+    @Mock
+    private DiaryService diaryService;
+    private ProfileController controller;
+    private ProfileService profileService;
+    private FacesMessage fMessages;
     
     public ProfileServiceTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-    
+    }    
     @Before
     public void setUp() {
+//     MockitoAnnotations.initMocks(this);
+        //создание мок-обьекта из класса ProfileService
+        profileService = mock(ProfileService.class);
+        fMessages = mock(FacesMessage.class);
+        controller = new ProfileController(profileService);
+        controller.setFacesMessage(fMessages);
     }
     
     @After
     public void tearDown() {
+    controller = null;
     }
 
     
     /**
      * Test of getByUser method, of class ProfileService.
      */
-    @Test
-    public void testGetByUser() {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        Comment com = new Comment();
-        com.setAutor(usr);
+  /* @Test
+    public void testAddOwnMethod() {
+              // profile = new Profile();
+       
+       profile.setDiet("diet");
+       profile.setMuscleDimension(10);
+       profile.setRation("ration");
+       profile.setWeight("90");
+       profileService.addOwnMethod("method", profile);
+     assertNotNull(profile.getRation());
+    }*/
+   @Test
+   public void test(){
+       controller.setProfile_owner(0);
+      user.setId(0);
+     when(profileService.getByUser(user)).thenReturn(null);
+       /* profile.setDiet("diet");
+       profile.setMuscleDimension(10);
+       profile.setRation("ration");
+       profile.setWeight("90");
+       profileService.addDiet("diet", profile);*/
+      // String result = profile.getDiet();
+     String   result = controller.listByUsr(user);
+       assertNull(result);
         
-        com.setText("Comment");
-        publication.addComment(com);
-        comm.add(com);
-        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
-        diaries.add(diary);
-        Statistics stat = new Statistics();
-        stats.add(stat);
-        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
-        profiles.add(prof);
-        System.out.println("getByUser");
-        
-        ProfileService instance = new ProfileService();
-        
-        Profile result = instance.getByUser(usr);
-        assertNotNull(result);
-        
-    }
+   }
+  
+   
+   @Test
+   public void testEnStat(){
+   profile = new Profile();
+   profileService.enabledStatistic(true);
+   assertTrue(profile.isDiaryEnabled());
+   
+   }
+   
+   @Test
+   public void testDiaryEn(){
+       profile = new Profile();
+       profileService.enabledDiary(false);
+       assertFalse(profile.isDiaryEnabled());
+   }
+           
 
-    /**
-     * Test of manageSettings method, of class ProfileService.
-     */
-    @Test
-    public void testManageSettings() {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        Comment com = new Comment();
-        com.setAutor(usr);
-        com.setText("Comment");
-        publication.addComment(com);
-        comm.add(com);
-        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
-        diaries.add(diary);
-        Statistics stat = new Statistics();
-        stats.add(stat);
-        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
-        profiles.add(prof);
-        System.out.println("manageSettings");
-        ProfileService instance = new ProfileService();
-        instance.manageSettings();
-        assertNotNull(instance);
-    }
-
-    /**
-     * Test of addParameters method, of class ProfileService.
-     */
-    @Test
-    public void testAddParameters() {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        Comment com = new Comment();
-        com.setAutor(usr);
-        com.setText("Comment");
-        publication.addComment(com);
-        comm.add(com);
-        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
-        diaries.add(diary);
-        Statistics stat = new Statistics();
-        stats.add(stat);
-        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
-        profiles.add(prof);
-        System.out.println("addParameters");
-        ProfileService instance = new ProfileService();
-        instance.addParameters();
-        assertNotNull(instance);
-    }
-
-    /**
-     * Test of viewStatistics method, of class ProfileService.
-     */
-    @Test
-    public void testViewStatistics() {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        Comment com = new Comment();
-        com.setAutor(usr);
-        com.setText("Comment");
-        publication.addComment(com);
-        comm.add(com);
-        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
-        diaries.add(diary);
-        Statistics stat = new Statistics();
-        stats.add(stat);
-        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
-        profiles.add(prof);
-        System.out.println("viewStatistics");
-        ProfileService instance = new ProfileService();
-        instance.viewStatistics();
-        assertNotNull(instance);
-    }
-
-    /**
-     * Test of addAddons method, of class ProfileService.
-     */
-    @Test
-    public void testAddAddons() {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        Comment com = new Comment();
-        com.setAutor(usr);
-        com.setText("Comment");
-        publication.addComment(com);
-        comm.add(com);
-        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
-        diaries.add(diary);
-        Statistics stat = new Statistics();
-        stats.add(stat);
-        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
-        profiles.add(prof);
-        System.out.println("addAddons");
-        ProfileService instance = new ProfileService();
-        instance.addAddons();
-        assertNotNull(instance);
-    }
+    
 }

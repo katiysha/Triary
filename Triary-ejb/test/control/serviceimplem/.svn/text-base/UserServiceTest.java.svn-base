@@ -4,19 +4,10 @@
  */
 package control.serviceimplem;
 
-
-import controller.CommentController;
 import java.util.Calendar;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.embeddable.EJBContainer;
-import javax.persistence.Query;
-import static org.mockito.Mockito.*;
-import model.Comment;
-import model.Diary;
-import model.Publication;
-import model.Users;
-import javax.faces.application.FacesMessage;
+import javax.persistence.EntityManager;
+import model.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -24,57 +15,81 @@ import static org.junit.Assert.*;
  *
  * @author kate
  */
-public class CommentServiceTest {
-    private CommentService commentService;
-     private FacesMessage fMessages;
-       private CommentController controller;
-     public CommentServiceTest() {
+public class UserServiceTest {
+    
+    public List<Publication> publ;
+    public List<Comment> comm;
+    public List<Users> users;
+    public List<Diary> diaries;
+    public List<Statistics> stats;
+    public List<Profile> profiles;
+    public UserServiceTest() {
     }
 
-        @Before
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+    
+    @Before
     public void setUp() {
-        commentService = mock(CommentService.class);
-        fMessages = mock(FacesMessage.class);
-        controller = new CommentController(commentService);
-        controller.setFacesMessage(fMessages);
     }
     
     @After
     public void tearDown() {
-        controller=null;
     }
 
-   /* @Test
-    public void testCreationObject() throws Exception {
-        
-        Comment commi = new Comment();
-      // assertNotNull(commi);
-        List<Comment> comms = null;
-        commi.setText("dfgh");
-        commserv.create(commi);
-        
-        assertEquals(commi.getText(), "dfgh");
-    }*/
-    
+
+    /**
+     * Test of getByUser method, of class UserService.
+     */
     @Test
-    public void testGetAll() throws Exception {
-           
-        String result = controller.listGetAll();
+    public void testGetByUser() {
+        Users usr = new Users();
+        usr.setEmail("a@b.com");
+        usr.setLogin("log");
+        users.add(usr);
+        Publication publication = new Publication();
+        publication.setText("This is News");
+        publication.setDate(Calendar.getInstance().getTime());
+        publication.setDate_publ(Calendar.getInstance().getTime());
+        publication.setTitle("Title");
+        publication.setSubtext("new news");
+        publication.setAutor(users.get(1));
+        publ.add(publication);
+        Comment com = new Comment();
+        com.setAutor(usr);
+        com.setText("Comment");
+        publication.addComment(com);
+        comm.add(com);
+        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
+        diaries.add(diary);
+        Statistics stat = new Statistics();
+        stats.add(stat);
+        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
+        profiles.add(prof);
+        
+        System.out.println("getByUser");
+        Integer usr_id = 1;
+        UserService instance = new UserService();
+        
+        List result = instance.getByUser(usr_id);
         assertNotNull(result);
-        assertEquals("succed", result);
-               }
+        
     }
-    
-   
-    
+
     /**
-     * Test of getByPublication method, of class CommentService.
+     * Test of findByName method, of class UserService.
      */
-  /*  @Test
-    public void testGetByPublication() throws Exception {
+    @Test
+    public void testFindByName() {
         Users usr = new Users();
         usr.setEmail("a@b.com");
         usr.setLogin("log");
+        usr.setName("Name");
         users.add(usr);
         Publication publication = new Publication();
         publication.setText("This is News");
@@ -89,22 +104,27 @@ public class CommentServiceTest {
         com.setText("Comment");
         publication.addComment(com);
         comm.add(com);
+        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
+        diaries.add(diary);
+        Statistics stat = new Statistics();
+        stats.add(stat);
+        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
+        profiles.add(prof);
         
-        System.out.println("getByPublication");
+        System.out.println("findByName");
+        String name = "Name";
+        UserService instance = new UserService();
         
-        
-        CommentService instance = new CommentService();
-        
-        List result = instance.getByPublication(publication);
+        List result = instance.findByName(name);
         assertNotNull(result);
         
-  }
+    }
 
     /**
-     * Test of getByDiary method, of class CommentService.
+     * Test of enableProfile method, of class UserService.
      */
-   /* @Test
-    public void testGetByDiary() throws Exception {
+    @Test
+    public void testEnableProfile() {
         Users usr = new Users();
         usr.setEmail("a@b.com");
         usr.setLogin("log");
@@ -124,20 +144,74 @@ public class CommentServiceTest {
         comm.add(com);
         Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
         diaries.add(diary);
-        System.out.println("getByDiary");
+        Statistics stat = new Statistics();
+        stats.add(stat);
+        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
+        profiles.add(prof);
         
-        CommentService instance = new CommentService();
+        System.out.println("enableProfile");
+        UserService instance = new UserService();
         
-        List result = instance.getByDiary(diary);
+        boolean result = instance.enableProfile();
         assertNotNull(result);
         
-    }*/
+    }
 
     /**
-     * Test of addComment method, of class CommentService.
+     * Test of addRation method, of class UserService.
      */
-  /*  @Test
-    public void testAddComment_3args_1() throws Exception {
+    @Test
+    public void testAddRation() {
+        Users usr = new Users();
+        usr.setEmail("a@b.com");
+        usr.setLogin("log");
+        
+        users.add(usr);
+        Publication publication = new Publication();
+        publication.setText("This is News");
+        publication.setDate(Calendar.getInstance().getTime());
+        publication.setDate_publ(Calendar.getInstance().getTime());
+        publication.setTitle("Title");
+        publication.setSubtext("new news");
+        publication.setAutor(users.get(1));
+        publ.add(publication);
+        Comment com = new Comment();
+        com.setAutor(usr);
+        com.setText("Comment");
+        publication.addComment(com);
+        comm.add(com);
+        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
+        diaries.add(diary);
+        Statistics stat = new Statistics();
+        stats.add(stat);
+        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
+        profiles.add(prof);
+        
+        System.out.println("addRation");
+        String ration = "Ration";
+        UserService instance = new UserService();
+        instance.addRation(ration);
+        assertNotNull(instance);
+    }
+
+    /**
+     * Test of addDiet method, of class UserService.
+     */
+    @Test
+    public void testAddDiet() {
+        System.out.println("addDiet");
+        String diet = "";
+        UserService instance = new UserService();
+        instance.addDiet(diet);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of enableStatistics method, of class UserService.
+     */
+    @Test
+    public void testEnableStatistics() {
         Users usr = new Users();
         usr.setEmail("a@b.com");
         usr.setLogin("log");
@@ -157,115 +231,16 @@ public class CommentServiceTest {
         comm.add(com);
         Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
         diaries.add(diary);
+        Statistics stat = new Statistics();
+        stats.add(stat);
+        Profile prof = new Profile("My diet", "My ration", Long.MIN_VALUE, Boolean.TRUE, Boolean.TRUE, null);
+        profiles.add(prof);
         
-        System.out.println("addComment");
+        System.out.println("enableStatistics");
+        UserService instance = new UserService();
         
-        CommentService instance = new CommentService();
-        boolean result = instance.addComment(com, publication, usr);
+        boolean result = instance.enableStatistics();
         assertNotNull(result);
         
-    }*/
-
-    /**
-     * Test of removeComment method, of class CommentService.
-     */
-   /*  @Test
-   public void testRemoveComment_3args_1() throws Exception {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        Comment com = new Comment();
-        com.setAutor(usr);
-        com.setText("Comment");
-        publication.addComment(com);
-        comm.add(com);
-        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
-        diaries.add(diary);
-        
-        System.out.println("removeComment");
-        
-        
-        CommentService instance = new CommentService();
-        
-        boolean result = instance.removeComment(com, publication, usr);
-        assertNull(result);
-        
-    }*/
-
-    /**
-     * Test of addComment method, of class CommentService.
-     */
-   /* @Test
-    public void testAddComment_3args_2() throws Exception {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        Comment com = new Comment();
-        com.setAutor(usr);
-        com.setText("Comment");
-        publication.addComment(com);
-        comm.add(com);
-        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
-        diaries.add(diary);
-        
-        System.out.println("addComment");
-        
-        CommentService instance = new CommentService();
-        
-        boolean result = instance.addComment(com, diary, usr);
-        assertNotNull(result);
-        
-    }*/
-
-    /**
-     * Test of removeComment method, of class CommentService.
-     */
-    /*@Test
-    public void testRemoveComment_3args_2() throws Exception {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        Comment com = new Comment();
-        com.setAutor(usr);
-        com.setText("Comment");
-        publication.addComment(com);
-        comm.add(com);
-        Diary diary = new Diary("Bodybuilding", "Back", "Dead lift", null, Integer.MIN_VALUE, null);
-        diaries.add(diary);
-        
-        System.out.println("removeComment");
-        
-        CommentService instance = new CommentService();
-        
-        boolean result = instance.removeComment(com, diary, usr);
-        assertNull(result);
-        
-    }*/
-
+    }
+}
