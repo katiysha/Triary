@@ -2,38 +2,35 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package control.serviceimplem;
+package controller;
 
-
-import controller.UserController;
+import control.serviceimplem.UserService;
 import javax.faces.application.FacesMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 /**
  *
  * @author kate
  */
-public class UserServiceTest {
+public class LoginControllerTest {
     
-    private UserController controller;
+    private LoginController controller;
     private UserService userService;
     private FacesMessage fMessages;
     
-    public UserServiceTest() {  
-        
+    public LoginControllerTest() {
     }
     
     @Before
     public void setUp() {
-        
         userService = mock(UserService.class);
         fMessages = mock(FacesMessage.class);
         
-        controller = new UserController(userService);
+        controller = new LoginController(userService);
         controller.setFacesMessage(fMessages);
     }
     
@@ -42,18 +39,21 @@ public class UserServiceTest {
         controller = null;
     }
 
+    /**
+     * Test of setFacesMessage method, of class LoginController.
+     */
     @Test
     public void testIncorrectData() {
-        controller.setUser_Id(1);
-        controller.setUser_name("pupkin");
+        controller.setUsername("gogno");
+        controller.setPassword("tupnyak");
         
-        when(userService.getByUser(0)).thenReturn(null);
+        when(userService.login("gogno", "tupnyak")).thenReturn(false);
         
-        String result = controller.listById();
+        String result = controller.loginClicked();
         
-        assertEquals("succed", result);
-        
+        assertEquals("failed", result);
         
     }
+
 
 }

@@ -4,13 +4,18 @@
  */
 package control.serviceimplem;
 
+
+import controller.PublicationController;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.persistence.EntityManager;
 import model.Comment;
 import model.Publication;
 import model.Users;
+import static org.mockito.Mockito.*;
+import model.baseclass.PublicType;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -19,165 +24,77 @@ import static org.junit.Assert.*;
  * @author kate
  */
 public class PublicationServiceTest {
-    
-    public List<Publication> publ;
-    public List<Comment> comm;
-    public List<Users> users;
-    
+    private Publication publication;
+    private PublicationService publicationService;
+   private Users user;
+     private PublicationController controller;
+   
+    private FacesMessage fMessages;
+    private String res;
     public PublicationServiceTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-    
+       
     @Before
     public void setUp() {
+      publicationService = mock(PublicationService.class);
+        fMessages = mock(FacesMessage.class);
+       controller = new PublicationController(publicationService); 
+        controller.setFacesMessage(fMessages);
     }
     
     @After
     public void tearDown() {
+        controller = null;
     }
-
-    /**
-     * Test of findByText method, of class PublicationService.
-     */
+    
+    
     @Test
-    public void testFindByText() {
-
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        
-        System.out.println("findByText");
-        String substr = publication.getText();
-        PublicationService instance = new PublicationService();
-        
-        List result = instance.findByText(substr);
-        assertNotNull(result);
+    public void testIncorrectType() {
+       controller.setPubl_Type("1");
+       when(publicationService.getByType("0")).thenReturn(null);
+        String result = controller.listByType();
+        assertEquals("succed", result);
         
     }
-
-    /**
-     * Test of findByDate method, of class PublicationService.
-     */
     @Test
-    public void testFindByDate() {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        
-        System.out.println("findByDate");
-        Date date = Calendar.getInstance().getTime();
-        PublicationService instance = new PublicationService();
-        
-        List result = instance.findByDate(date.toString());
+    public void testindByDate() {
+    List <Publication> result= publicationService.findByDate("11-12-2012");
+       //controller.setPubl_Type("1");
+     //  when(publicationService.getByType("0")).thenReturn(null);
+       // String result = controller.listByType();
+        //assertEquals("succed", result);
         assertNotNull(result);
     }
-
-    /**
-     * Test of getByTitle method, of class PublicationService.
-     */
+    
     @Test
-    public void testGetByTitle() {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publ.add(publication);
-        
-        System.out.println("getByTitle");
-        String title = "Title";
-        PublicationService instance = new PublicationService();
-        
-        List result = instance.getByTitle(title);
-        assertNotNull(result);
-        
+    public void testFindByText(){ 
+        publication=new Publication();
+        publication.setText("any_text");
+     //publicationService.
+      assertNotNull(publicationService.findByText("any_text"));
     }
-
-    /**
-     * Test of getByType method, of class PublicationService.
-     */
     @Test
-    public void testGetByType() {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
+    public void testGetAll(){
+        publication = new Publication();
+        user=new Users();
+        user.setEmail("email");
+        user.setId(1);
+        user.setLogin("login");
+        user.setName("name");
+        user.setPassword("password");
+        user.setPhone("11-22-33");
+        publication.setAutor(user);
+        publication.setSubtext("sub text");
         publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publication.setType("NEWS");
-        publ.add(publication);
-        
-        System.out.println("getByType");
-        String type = "NEWS";
-        PublicationService instance = new PublicationService();
-        
-        List result = instance.getByType(type);
-        assertNotNull(result);
-        
-    }
+        publication.setType("type");
+        List<Publication> result =publicationService.getAll();
+   assertNotNull(result);
+  assertNotNull( publicationService.getByTitle("Title"));
+   assertNotNull(publicationService.getByType("type"));
+  
+    
 
-    /**
-     * Test of getByAutor method, of class PublicationService.
-     */
-    @Test
-    public void testGetByAutor() {
-        Users usr = new Users();
-        usr.setEmail("a@b.com");
-        usr.setLogin("log");
-        users.add(usr);
-        Publication publication = new Publication();
-        publication.setText("This is News");
-        publication.setDate(Calendar.getInstance().getTime());
-        publication.setDate_publ(Calendar.getInstance().getTime());
-        publication.setTitle("Title");
-        publication.setSubtext("new news");
-        publication.setAutor(users.get(1));
-        publication.setType("NEWS");
-        publ.add(publication);
-        
-        System.out.println("getByAutor");
-        
-        PublicationService instance = new PublicationService();
-        
-        List result = instance.getByAutor(usr);
-        assertNotNull(result);
-        
     }
-   
 }
+

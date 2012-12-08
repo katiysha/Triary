@@ -54,14 +54,17 @@ public class CommentService extends Generic<Comment> implements ICommentService{
         return (List<Comment>) em.createNamedQuery("Comment.findByPubl").setParameter("publication", publ).getResultList();
     }
 
-    @Override
-    public List<Comment> getByDiary(Diary diary) {
+        @Override
+        public List<Comment> getByDiary(Diary diary) {
         return (List<Comment>) em.createNamedQuery("Comment.findByDiary").setParameter("diary", diary).getResultList();
     }
     
     @Override
     public List<Comment> getAll() {
+<<<<<<< HEAD
         
+=======
+>>>>>>> 13fc261df3b4eff10e3f2df1d8817ca0a9b1ec13
         return (List<Comment>) em.createNamedQuery("Comment.findAll").getResultList();
     }
 

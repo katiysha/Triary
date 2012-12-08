@@ -16,7 +16,11 @@ import model.Users;
  *
  * @author kate
  */
+<<<<<<< HEAD
 @ManagedBean(name="loginController")
+=======
+@ManagedBean(name="userController")
+>>>>>>> 13fc261df3b4eff10e3f2df1d8817ca0a9b1ec13
 @RequestScoped
 @Controller
 public class UserController {
@@ -31,12 +35,20 @@ public class UserController {
      *
      * @param userService
      */
+<<<<<<< HEAD
 //    @Inject
+=======
+    @Inject
+>>>>>>> 13fc261df3b4eff10e3f2df1d8817ca0a9b1ec13
     public UserController (UserService userService){
         this.userService = userService;
     }
     
+<<<<<<< HEAD
 //    @Inject
+=======
+    @Inject
+>>>>>>> 13fc261df3b4eff10e3f2df1d8817ca0a9b1ec13
     public void setFacesMessage(FacesMessage messages){
         this.messages = messages;
     }

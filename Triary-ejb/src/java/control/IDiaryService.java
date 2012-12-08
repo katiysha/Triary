@@ -14,9 +14,10 @@ import model.Users;
  * @author kate
  */
 public interface IDiaryService {
-    
+    public List<String> getMuscleGroup();
+public List <String> getTask();
     public String selectTrainingType(Integer index);
-    
+     public String selectFealings(Integer index);
     public String selectMuscleGroup(Integer index);
     
     public String selectTask(Integer index);

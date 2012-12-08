@@ -19,7 +19,11 @@ import model.Users;
  * @author aliona
  */
 
+<<<<<<< HEAD
 @Stateless
+=======
+   @Stateless
+>>>>>>> 13fc261df3b4eff10e3f2df1d8817ca0a9b1ec13
 @LocalBean
 public class DiaryService extends Generic<Diary> implements IDiaryService{
 
@@ -52,6 +56,21 @@ public class DiaryService extends Generic<Diary> implements IDiaryService{
         List<String> type = null;
         type = em.createNamedQuery("selectTrainingType").getResultList();
         return type.get(index);
+    }
+
+     @Override
+    public List <String> getTask() {
+        List<String> tasks = null;
+      return  tasks = em.createNamedQuery("selectTask").getResultList();
+      
+    }
+    
+        @Override
+    public List<String> getMuscleGroup() {
+       List<String> muscl_gr = null;
+       muscl_gr = em.createNamedQuery("selectMuscleGroup").getResultList();
+           return muscl_gr;
+       
     }
 
     @Override
@@ -90,3 +109,15 @@ public class DiaryService extends Generic<Diary> implements IDiaryService{
  
 } 
 
+<<<<<<< HEAD
+=======
+     @Override
+    public String selectFealings(Integer index) {
+        List<String> feallings = null;
+        feallings = em.createNamedQuery("selectFeallings").getResultList();
+        return feallings.get(index);
+    }
+} 
+
+
+>>>>>>> 13fc261df3b4eff10e3f2df1d8817ca0a9b1ec13
