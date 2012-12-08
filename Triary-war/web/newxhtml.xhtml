@@ -1,0 +1,68 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">  
+
+    <h:head>  
+
+    </h:head>  
+
+    <h:body>
+        <div id='container'>
+            <div id='header' style=' height:11.6%; background: url(images/main_black_img.jpg); width: 100%;'>
+                <a href="index.xhtml"><img src="images/logo.png" style="left: auto; zoom: 25%"/></a>
+            </div>  
+        </div>
+        <div id='content-left' style=' margin : 0px; float : left; width : 200px;'>
+            <h:form>
+
+                <p:growl id="messages"/>
+
+                
+                <p:menu>
+                    <p:submenu label="Ajax Menuitems">
+                        <p:menuitem value="Save" actionListener="{menuBean.save}" update="messages" icon="ui-icon-disk" />
+                        <p:menuitem value="Update" actionListener="{menuBean.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+                    </p:submenu>
+                    <p:submenu label="Non-Ajax Menuitem">
+                        <p:menuitem value="Delete" actionListener="{menuBean.delete}" update="messages" ajax="false" icon="ui-icon-close"/>
+                    </p:submenu>
+                    <p:submenu label="Navigations">
+                        <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>
+                        <p:menuitem value="Internal" outcome="/mobile/index" icon="ui-icon-star"/>
+                    </p:submenu>
+                </p:menu>
+                </h:form>
+        </div>
+        <h:form id="form">  
+            <p:separator id="separator"/>
+            <h3>Login form</h3>
+            <p:inputText/><p:inputText />
+            <p:button value="Login"/>
+
+            <p:separator id="separator2"/>
+            <h3>Register</h3>
+            <p:button value="Register"/>
+            <p:separator id="separator3"/>
+            <p:panel id ="id_panel">
+                <p:dataGrid value="#{testMB.lstNews}" var="publication"  
+                            paginator="true" 
+                            paginatorPosition="bottom"
+                            rows="4" 
+                            effect="true" columns="1" >
+                    <p:column>
+                        <strong><h:outputText value="#{publication.title}" style="float: left" /></strong>
+                        <h:outputLink value="News_Comment.xhtml" style="float: right" styleClass="ll">
+                            <f:param name="id_news" value="{publication.id}"/>
+                            <h:outputText value="подробней"/>
+                        </h:outputLink>
+                        <br></br>
+                    </p:column>
+                </p:dataGrid>
+            </p:panel>
+
+        </h:form>  
+    </h:body>
+
+</html>  
