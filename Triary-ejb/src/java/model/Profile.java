@@ -14,31 +14,35 @@ import model.baseclass.BaseEntity;
  *
  * @author aliona
  */
-@Table(name = "diary", catalog = "profile", schema = "")
-@NamedQueries({
-   @NamedQuery(name = "Profile.findById", query = "SELECT p FROM Profile p WHERE id = :id"),
-   @NamedQuery(name = "Profile.getByUser", query = "SELECT p FROM Profile p WHERE owner = :owner")
-   
-})
 @Entity
 @XmlRootElement
+@Table(name = "profile", catalog = "triary", schema = "")
+@NamedQueries({
+   //@NamedQuery(name = "Profile.findById", query = "SELECT p FROM Profile p WHERE id_profile = :id"),
+   //@NamedQuery(name = "Profile.getByUser", query = "SELECT p FROM Profile p WHERE owner_id = :owner"),
+   //@NamedQuery(name ="Profile.getByDiaryEnabled", query = "SELECT p.diary_enabled FROM Profile p WHERE p.owner_id = :id_users"),
+   //@NamedQuery(name ="Profile.getByStatisticsEn", query = "SELECT p.stat_enabled FROM Profile p WHERE p.owner_id = :id_users"),
+   //@NamedQuery(name = "Profile.updateDiaryEnabled", query = "UPDATE Profile p SET p.diary_enabled = :diary_enabled WHERE p.owner_id = :id_users"),
+   //@NamedQuery(name = "Profile.updateStatisticsEn", query = "UPDATE Profile p SET p.stat_enabled = :stat_enabled WHERE p.owner_id = :id_users"),
+})
+
 public class Profile extends BaseEntity implements Serializable{
     
-    @Column(name = "diet", nullable=false)
+    @Column(name = "diet", nullable=true, length = 255)
     private String diet;
-    @Column(name = "ration", nullable=false)
+    @Column(name = "ration", nullable=true, length = 255)
     private String ration;
-    @Column(name = "date", nullable=false)
+    @Column(name = "date", nullable=true)
     private Timestamp date;
-    @Column(name = "weight", nullable=false)
-    private Long weight;
-    @Column(name = "stat_enabled", nullable=false)
+    @Column(name = "weight", nullable=true, length = 255)
+    private String weight;
+    @Column(name = "stat_enabled", nullable=true)
     private Boolean stat_enabled;
-    @Column(name = "diary_enabled", nullable=false)
+    @Column(name = "diary_enabled", nullable=true)
     private Boolean diary_enabled;
-    @Column(name = "muscle_dimension", nullable=false)
+    @Column(name = "muscle_dimension", nullable=true, length = 15)
     private Integer muscle_dimension;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "owner", referencedColumnName = "id")
     private Users owner;
     
@@ -48,7 +52,7 @@ public class Profile extends BaseEntity implements Serializable{
     
     public Profile(){}
     
-    public Profile(String diet, String ration, Long weight, Boolean stat_en, Boolean diary_en, Timestamp date){
+    public Profile(String diet, String ration, String weight, Boolean stat_en, Boolean diary_en, Timestamp date){
         this.diet= diet;
         this.ration = ration;
         this.weight = weight;
@@ -92,11 +96,11 @@ public class Profile extends BaseEntity implements Serializable{
         this.muscle_dimension = muscle_dimension;
     }
     
-    public Long getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(Long weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
     public Boolean isStatEnabled() {

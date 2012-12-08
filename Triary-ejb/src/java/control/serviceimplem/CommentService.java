@@ -10,7 +10,9 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.validation.ConstraintViolationException;
 import model.Comment;
 import model.Diary;
@@ -44,12 +46,23 @@ public class CommentService extends Generic<Comment> implements ICommentService{
     
     @Override
     public List<Comment> getByPublication(Publication publ) {
+        Query q = em.createQuery("select c from comment c");
+        List <Comment> list_com = q.getResultList();
+        for (Comment com_el : list_com){
+            String text_el = com_el.getText();
+        }
         return (List<Comment>) em.createNamedQuery("Comment.findByPubl").setParameter("publication", publ).getResultList();
     }
 
     @Override
     public List<Comment> getByDiary(Diary diary) {
         return (List<Comment>) em.createNamedQuery("Comment.findByDiary").setParameter("diary", diary).getResultList();
+    }
+    
+    @Override
+    public List<Comment> getAll() {
+        
+        return (List<Comment>) em.createNamedQuery("Comment.findAll").getResultList();
     }
 
     @Override

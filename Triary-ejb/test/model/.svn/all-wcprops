@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/tpps2012-sportportal/!svn/ver/37/Triary/Triary-ejb/test/model
+END
+ModelSuite.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/tpps2012-sportportal/!svn/ver/26/Triary/Triary-ejb/test/model/ModelSuite.java
+END
+PublicationTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/tpps2012-sportportal/!svn/ver/32/Triary/Triary-ejb/test/model/PublicationTest.java
+END
+ProfileTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/tpps2012-sportportal/!svn/ver/31/Triary/Triary-ejb/test/model/ProfileTest.java
+END
+UsersTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/tpps2012-sportportal/!svn/ver/26/Triary/Triary-ejb/test/model/UsersTest.java
+END
+StatisticsTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/tpps2012-sportportal/!svn/ver/26/Triary/Triary-ejb/test/model/StatisticsTest.java
+END
+CommentTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/tpps2012-sportportal/!svn/ver/26/Triary/Triary-ejb/test/model/CommentTest.java
+END

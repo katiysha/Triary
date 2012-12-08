@@ -20,12 +20,12 @@ import model.baseclass.UserBase;
 @Table(name = "users", catalog = "triary", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"login"})})
 @NamedQueries({
-   @NamedQuery(name = "User.findById", query = "SELECT u FROM user u WHERE u.id_user = :id_user")
+   //@NamedQuery(name = "User.findById", query = "SELECT u FROM user u WHERE u.id_user = :id_user")
 })
 @XmlRootElement
 public class Users extends UserBase implements Serializable {
      
-    @Column(name = "role_user", nullable = false, length = 15)
+    @Column(name = "role_user", nullable = true, length = 55)
     private String roleuser;
     @OneToMany(mappedBy = "autor")
     private List<Comment> commentList;

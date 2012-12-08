@@ -4,25 +4,21 @@
  */
 package control.serviceimplem;
 
-
 import control.IDiaryService;
-import control.serviceimplem.DiaryService;
 import java.sql.Time;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolationException;
-import model.Comment;
 import model.Diary;
 import model.Users;
 
-
 /**
  *
- * @author kate
+ * @author aliona
  */
+
 @Stateless
 @LocalBean
 public class DiaryService extends Generic<Diary> implements IDiaryService{
@@ -45,7 +41,7 @@ public class DiaryService extends Generic<Diary> implements IDiaryService{
     }
     
     @Override
-    public void addRecord(Users usr, String training_type, String muscle_gr,  String tasks, Time tr_duration, Integer repeat_amount, String fillings) {
+    public void addRecord(Users usr, String training_type, String muscle_gr,  String tasks, String tr_duration, Integer repeat_amount, String fillings) {
             Diary diary = new Diary(training_type, muscle_gr, tasks, tr_duration, repeat_amount, fillings);
             diary.setOwner(usr);
             create(diary);
@@ -91,6 +87,6 @@ public class DiaryService extends Generic<Diary> implements IDiaryService{
         diary.setFillings(filings);
         create(diary);
     }
+ 
+} 
 
-    
-}

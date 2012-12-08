@@ -14,42 +14,42 @@ import javax.validation.constraints.Size;
  *
  * @author kate
  */
-@Entity
+@MappedSuperclass
 public class UserBase extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "login", nullable = false, length = 45, unique=true)
+    @Column(name = "login", nullable = false, length = 25, unique=true)
     protected  String login;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "password", nullable = false, length = 45)
+    @Column(name = "password", nullable = false, length = 20)
     protected  String password;
     @Basic(optional = false)
-    @Column(name = "register_date", nullable = true)
+    @Column(name = "register_date", nullable = false)
     protected Timestamp  register_date;
     @Basic(optional = false)
     @NotNull
     @Size(min=1, max = 45)
-    @Column(name = "email", nullable = false, length=45)
+    @Column(name = "email", nullable = false, length=50)
     protected String  email;
     @Basic(optional = false)
     @NotNull
     @Size(min=1, max = 45)
-    @Column(name = "name", nullable = false, length=45)
+    @Column(name = "name", nullable = false, length=25)
     protected String  name;
     @Basic(optional = false)
     @NotNull
     @Size(min=1, max = 45)
-    @Column(name = "surname", nullable = false, length=45)
+    @Column(name = "surname", nullable = false, length=25)
     protected String  surname;
     @Basic(optional = false)
     @NotNull
     @Size(min=1, max = 11)
-    @Column(name = "phone", nullable = false, length=11)
+    @Column(name = "phone", nullable = false, length=12)
     protected String  phone;
     
     public String getEmail() {

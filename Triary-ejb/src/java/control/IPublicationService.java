@@ -22,4 +22,6 @@ public interface IPublicationService {
     
     public List<Publication> getByAutor (Users usr);
     
+    public List<Publication> getAll();
+    
 }

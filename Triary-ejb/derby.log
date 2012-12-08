@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Sat Dec 01 16:37:21 EET 2012:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-013b-56e6-7127-00000b6510c0 
+on database directory /tmp/gfembed3653898689610465424tmp/lib/databases/embedded_default  with class loader sun.misc.Launcher$AppClassLoader@633b88 
+Loaded from file:/home/deezzel/glassfish3/javadb/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_09-b05
+user.dir=/home/deezzel/working_project/Triary/Triary-ejb
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

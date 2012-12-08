@@ -4,11 +4,14 @@
  */
 package model;
 
+
 import java.io.Serializable;
 import java.security.Timestamp;
+import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import model.baseclass.BaseEntity;
+
 
 /**
  *
@@ -17,25 +20,25 @@ import model.baseclass.BaseEntity;
 @Entity
 @Table(name = "comment", catalog = "triary", schema = "")
 @NamedQueries({
-   @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
-   @NamedQuery(name = "Comment.findByPubl", query = "SELECT c FROM Comment c WHERE c.publication = :publication"),
-   @NamedQuery(name = "Comment.findByDiary", query = "SELECT c FROM Comment c WHERE c.diary = :diary")
+   @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c")
+   //@NamedQuery(name = "Comment.findByPubl", query = "SELECT c FROM Comment c WHERE c.publication = :publication"),
+   //@NamedQuery(name = "Comment.findByDiary", query = "SELECT c FROM Comment c WHERE c.diary = :diary")
 })
 @XmlRootElement
 public class Comment extends BaseEntity implements Serializable {
-    @Column(name = "text", nullable = false, length = 200)
+    @Column(name = "text", nullable = false, length = 255)
     private String text;
-    @Column(name = "date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp date;
+    @Column(name = "date", nullable = true)
+    @Temporal(TemporalType.DATE)
+    private Date date;
     @ManyToOne
-    @JoinColumn(name = "publication", referencedColumnName = "id")
+    @JoinColumn(name = "publication", nullable = true, referencedColumnName = "id")
     private Publication publication;
     @ManyToOne
-    @JoinColumn(name = "diary", referencedColumnName = "id")
+    @JoinColumn(name = "diary", nullable = true, referencedColumnName = "id")
     private Diary diary;
     @ManyToOne
-    @JoinColumn(name = "autor", referencedColumnName = "id")
+    @JoinColumn(name = "autor", nullable = true, referencedColumnName = "id")
     private Users autor;
     
     public Comment(){
@@ -56,11 +59,11 @@ public class Comment extends BaseEntity implements Serializable {
         this.text = text;
     }
 
-    public Timestamp getDatecomm() {
+    public Date getDatecomm() {
         return date;
     }
 
-    public void setDatecomm(Timestamp date) {
+    public void setDatecomm(Date date) {
         this.date = date;
     }
     

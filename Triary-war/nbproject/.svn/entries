@@ -1,7 +1,7 @@
 10
 
 dir
-15
+37
 http://svn.stu.cn.ua/svn/tpps2012-sportportal/Triary/Triary-war/nbproject
 http://svn.stu.cn.ua/svn/tpps2012-sportportal
 
@@ -25,40 +25,6 @@ has-props
 
 
 b3f8b937-90fd-e111-86e1-0025221b8147
-
-genfiles.properties
-file
-
-
-
-
-2012-10-09T09:40:37.288858Z
-fb6e5a2673d101342c355a7a9ad77a76
-2012-09-17T17:28:43.147156Z
-2
-katiysha
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-465
 
 ant-deploy.xml
 file
@@ -127,6 +93,40 @@ katiysha
 
 
 58405
+
+genfiles.properties
+file
+
+
+
+
+2012-10-09T09:40:37.288858Z
+fb6e5a2673d101342c355a7a9ad77a76
+2012-09-17T17:28:43.147156Z
+2
+katiysha
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+465
 
 project.properties
 file

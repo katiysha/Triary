@@ -7,6 +7,8 @@ package control.serviceimplem;
 
 import control.IStatisticsService;
 import java.util.List;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Publication;
@@ -16,6 +18,8 @@ import model.Statistics;
  *
  * @author kate
  */
+@Stateless
+@LocalBean
 public class StatisticsService extends Generic<Statistics> implements IStatisticsService{
 
     @PersistenceContext(unitName = "Triary-ejbPU")

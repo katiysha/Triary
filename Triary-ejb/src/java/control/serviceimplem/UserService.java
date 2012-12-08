@@ -7,6 +7,9 @@ package control.serviceimplem;
 
 import control.IUserService;
 import java.util.List;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Publication;
@@ -16,6 +19,8 @@ import model.Users;
  *
  * @author kate
  */
+@LocalBean
+@Stateless(name="UserService")
 public class UserService extends Generic<Users> implements IUserService{
 
     @PersistenceContext(unitName = "Triary-ejbPU")
@@ -45,23 +50,27 @@ public class UserService extends Generic<Users> implements IUserService{
     }
 
     @Override
-    public boolean enableProfile() {
-        return true;
+    public boolean login(String login, String passwd) {
+        if (null != getByLogin(login)) {
+            if (getByLogin(login).getPassword().equals(passwd)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public void addRation(String ration) {
+    public Users getByLogin(String login) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void addDiet(String diet) {
+    public boolean registration(Users user) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public boolean enableStatistics() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+  
+
+   
     
 }

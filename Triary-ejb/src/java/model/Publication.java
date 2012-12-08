@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import model.baseclass.BaseEntity;
+import model.baseclass.PublicType;
 /**
  *
  * @author aliona
@@ -17,27 +18,27 @@ import model.baseclass.BaseEntity;
 @Table(name = "publication", catalog = "triary", schema = "")
 //@XmlRootElement
 @NamedQueries({
-   
-    @NamedQuery(name = "Publication.findByText", query = "SELECT p FROM Publication p WHERE p.text = :text"),
-    @NamedQuery(name = "Publication.findByTitle", query = "SELECT p FROM Publication p WHERE p.title = :title"),
-    @NamedQuery(name = "Publication.findByDate", query = "SELECT p FROM Publication p WHERE p.date = :date"),
-    @NamedQuery(name = "Publication.getByAutor", query = "SELECT p FROM Publication p WHERE p.autor = :autor"),
-    @NamedQuery(name = "Publication.findByType", query = "SELECT p FROM Publication p WHERE p.type = :type ORDER BY p.date_publ DESC")
+   @NamedQuery(name = "Publication.findAll", query = "SELECT p FROM Publication p"),
+    //@NamedQuery(name = "Publication.findByText", query = "SELECT p FROM Publication p WHERE p.text = :text"),
+    @NamedQuery(name = "Publication.findByTitle", query = "SELECT p FROM Publication p WHERE p.title = :title")
+    //@NamedQuery(name = "Publication.findByDate", query = "SELECT p FROM Publication p WHERE p.date_publ = :date"),
+    //@NamedQuery(name = "Publication.getByAutor", query = "SELECT p FROM Publication p WHERE p.autor_id = :autor"),
+    //@NamedQuery(name = "Publication.findByType", query = "SELECT p FROM Publication p WHERE p.type = :type ORDER BY p.date_publ DESC")
 })
 public class Publication extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Column(name = "text", nullable = false)
+    @Column(name = "text", nullable = true, length = 255)
     private String text;
     @Column(name = "title", nullable = true, length = 255)
     private String title;
-    @Column(name = "subtext", nullable = false, length = 255)
+    @Column(name = "subtext", nullable = true, length = 255)
     private String subtext;
     @Column(name = "date_publ")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date date_publ;
    // @Size(min = 1, max = 15)
-    @Column(name = "type", nullable = false, length = 15)
+    @Column(name = "type", nullable = true, length = 55)
     private String type;
     @OneToMany(mappedBy = "publication", cascade={CascadeType.ALL})
     private List<Comment> commentList;
@@ -137,4 +138,17 @@ public class Publication extends BaseEntity implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setTypeNews() {
+        this.type = PublicType.NEWS.toString();         
+    }
+
+    public void setTypeDiets() {
+        this.type = PublicType.DIETS.toString();         
+    }
+    
+    public void setTypeTrMethod() {
+        this.type = PublicType.TRAININGMETHODS.toString();         
+    }
+    
 }

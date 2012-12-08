@@ -27,6 +27,6 @@ public interface IDiaryService {
     
     public void addFilings(Diary diary, String filings);
     
-    public void addRecord(Users usr,String training_type, String muscle_gr,  String tasks, Time tr_duration, Integer repeat_amount, String fillings);
+    public void addRecord(Users usr,String training_type, String muscle_gr,  String tasks, String tr_duration, Integer repeat_amount, String fillings);
     
 }

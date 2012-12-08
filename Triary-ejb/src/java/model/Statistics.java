@@ -4,24 +4,31 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import model.baseclass.BaseEntity;
 
 /**
  *
  * @author kate
  */
-public class Statistics {
+@Entity
+@Table(name = "statistics", catalog = "triary", schema = "")
+
+public class Statistics extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Column(name = "title", nullable = true, length = 255)
     private String title;
-    @Column(name = "type", nullable = false, length = 15)
-    private String type;
+    @Column(name = "type", nullable = true, length = 1)
+    private Integer type;
     
     @JoinColumn(name = "owner", referencedColumnName = "id")
     @ManyToOne
@@ -65,11 +72,11 @@ public class Statistics {
         return hm;
     }
     
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
     
