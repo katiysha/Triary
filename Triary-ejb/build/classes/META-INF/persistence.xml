@@ -10,6 +10,7 @@
     <class>model.Statistics</class>
     <class>model.Users</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <validation-mode>NONE</validation-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/triary"/>
       <property name="javax.persistence.jdbc.password" value="qjgndfqe"/>
@@ -17,4 +18,5 @@
       <property name="javax.persistence.jdbc.user" value="root"/>
     </properties>
   </persistence-unit>
+  
 </persistence>

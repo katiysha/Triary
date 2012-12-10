@@ -19,7 +19,7 @@ public interface IGeneric<T> {
     
     int count();
     
-    T find(Long id);
+    T find(Integer id);
     
     List<T> findAll();
     

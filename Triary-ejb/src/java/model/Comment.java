@@ -20,8 +20,8 @@ import model.baseclass.BaseEntity;
 @Entity
 @Table(name = "comment", catalog = "triary", schema = "")
 @NamedQueries({
-   @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c")
-   //@NamedQuery(name = "Comment.findByPubl", query = "SELECT c FROM Comment c WHERE c.publication = :publication"),
+   @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
+   @NamedQuery(name = "Comment.findByPubl", query = "SELECT c FROM Comment c WHERE c.publication = :publication")
    //@NamedQuery(name = "Comment.findByDiary", query = "SELECT c FROM Comment c WHERE c.diary = :diary")
 })
 @XmlRootElement

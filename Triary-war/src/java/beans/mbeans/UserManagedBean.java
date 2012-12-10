@@ -13,12 +13,14 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.AuthenticationException;
 import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.naming.ldap.InitialLdapContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Users;
 
@@ -69,14 +71,14 @@ public class UserManagedBean {
 
     public boolean isAdminOrModer() {
         if (currentUser != null) {
-            if ((currentUser.getRoleuser().equals("ADMINISTRATOR")) || (currentUser.getRoleuser().equals("MODERATOR"))) {
+            if ((currentUser.getRoleuser().equals("admin")) || (currentUser.getRoleuser().equals("moder"))) {
                 return true;
             }
         }
         return false;
     }
 
-    public void checkPasswd() {
+    public void checkPasswd() throws IOException {
 
         //if (userService.login(login, password)) {
 
@@ -86,12 +88,15 @@ public class UserManagedBean {
 
         login = "";
         password = "";
+        
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/Triary-war/faces/index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8082/Triary-war/news.xhtml");
 
+            return;
         } catch (IOException ex) {
             Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public void logout() {
@@ -106,7 +111,7 @@ public class UserManagedBean {
             if (session != null) {
                 session.invalidate();
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Triary-war/faces/index.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Triary-war/index.xhtml");
 
                 } catch (IOException ex) {
                     Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,11 +172,11 @@ public class UserManagedBean {
             throw new RuntimeException(ne);
         }
         try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Triary-war/faces/index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/Triary-war/faces/index.xhtml");
 
-                } catch (IOException ex) {
-                    Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        } catch (IOException ex) {
+            Logger.getLogger(UserManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 }

@@ -21,6 +21,7 @@ import model.baseclass.UserBase;
     @UniqueConstraint(columnNames = {"login"})})
 @NamedQueries({
    //@NamedQuery(name = "User.findById", query = "SELECT u FROM user u WHERE u.id_user = :id_user")
+    @NamedQuery(name = "Users.getByLogin", query = "SELECT u FROM Users u WHERE u.login = :login")
 })
 @XmlRootElement
 public class Users extends UserBase implements Serializable {

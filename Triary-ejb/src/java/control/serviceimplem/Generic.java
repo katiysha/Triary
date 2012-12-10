@@ -23,7 +23,7 @@ public abstract class Generic<T> implements IGeneric<T> {
     protected abstract EntityManager getEntityManager();
 
     @Override
-    public T find(Long id) {
+    public T find(Integer id) {
         return getEntityManager().find(entityClass, id);
     }
     

@@ -4,7 +4,6 @@
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>/WEB-INF/newfaces-config1.xml</param-value>
     </context-param>
-    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -18,16 +17,6 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>ui-lightness</param-value>
     </context-param>
-    <servlet>
-        <servlet-name>Resource Servlet</servlet-name>
-        <servlet-class>  
-           org.primefaces.resource.ResourceServlet  
-       </servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Resource Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -36,12 +25,26 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    <security-constraint>
+        <display-name>index</display-name>
+        <web-resource-collection>
+            <web-resource-name>index</web-resource-name>
+            <description>index</description>
+            <url-pattern>/index.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>index</description>
+            <role-name>admin</role-name>
+            <role-name>moder</role-name>
+            <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>openDS</realm-name>
         <form-login-config>
-            <form-login-page>/login.xhtml</form-login-page>
-            <!--<form-error-page>/Login_Fail.xhtml</form-error-page>-->
+            <form-login-page>/index.xhtml</form-login-page>
+            <form-error-page>/Login_Fail.xhtml</form-error-page>
         </form-login-config>
     </login-config>
     <security-role>

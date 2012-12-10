@@ -13,9 +13,16 @@
         <div id='container'>
             <div id='header' style=' height:11.6%; background: url(images/main_black_img.jpg); width: 100%;'>
                 <a href="index.xhtml"><img src="images/logo.png" style="left: auto; zoom: 29%"/></a>
-                <h:form style="position: relative; margin-left: 78%; margin-top: -5%; color: white">
-                    <h:outputLabel value="Добро пожаловать, admin" rendered="#{userManagedBean.currentUser == null}" />
-                </h:form>
+                <div style="margin-left: 80%; margin-top: -5%">
+                    <h:outputLabel style="color: white" value="Добро пожаловать: "/><h:outputText style="color: white" value="#{userManagedBean.loginUserName}"/>
+                </div>
+                <div style="margin-left: 80%">
+                    <h:form>
+                        <c:if test="${userManagedBean.currentUser!=null}"> 
+                            <p:commandButton  value="Выйти" action="#{userManagedBean.logout}"/>
+                        </c:if>
+                    </h:form>
+                </div>
             </div>  
             <div id="log" style="width: 100%; height: 8%; background-image: url(images/yellow.jpg); background-repeat: repeat">
                 <h:form id="search_form">
@@ -23,46 +30,66 @@
                     <p:commandButton value="Поиск" id="search_button"/>
                 </h:form>
             </div>
-<!--            <div id='content-left' style=' margin : 0px; float : left; width : 270px;'>
-                <h:form>
-
-                    <p:growl id="messages"/>
-
-
-                    <p:menu>
-                        
-                        <p:submenu label="Navigations">
-                            <p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home"/>
-                            <p:menuitem value="News" outcome="news.xhtml" icon="ui-icon-star"/>
-                        </p:submenu>
-                    </p:menu>
-                </h:form>
-            </div>-->
             <div id="content" style=" margin-left: 15%; margin-right: 15%;background-image: url(images/.png); background-size: 40%; background-repeat: no-repeat; background-position: right; ">
                 <h:form id="form">
                     <p:tabView id="tabView" dynamic="true" cache="true" widgetVar="tabs">
 
                         <p:tab id="tabnews"  title="Новости">
-                            <p:dataGrid value="#{testMB.lstNews}" var="publication"  
+                            <p:dataGrid value="#{publMB.lstNews}" var="publication"  
                                         paginator="true" 
                                         paginatorPosition="bottom"
                                         rows="4" 
                                         effect="true" columns="1" >
                                 <p:column>
                                     <strong><h:outputText value="#{publication.title}" style="float: left" /></strong>
-                                    <h:outputLink value="News_Comment.xhtml" style="float: right" styleClass="ll">
-                                        <f:param name="id_news" value="{publication.id}"/>
+                                    <h:outputLink value="comment_news.xhtml" style="float: right" styleClass="ll">
+                                        <f:param name="id_news" value="#{publication.id}"/>
                                         <h:outputText value="подробней"/>
                                     </h:outputLink>
                                     <br></br>
+                                    <h:outputText value="#{publication.subtext}..." style="float: left" escape="false"/>
+                                    <br></br>
+                                    <p:separator style="width:100%;height:5px" />
                                 </p:column>
                             </p:dataGrid>
                         </p:tab>
                         <p:tab id="tabtrmethods" title="Методики тренировок">
-
+                            <p:dataGrid value="#{publMB.lstTrainingMethods}" var="trainingmethod"  
+                                        paginator="true" 
+                                        paginatorPosition="bottom"
+                                        rows="4" 
+                                        effect="true" columns="1" >
+                                <p:column>
+                                    <strong><h:outputText value="#{trainingmethod.title}" style="float: left" /></strong>
+                                    <h:outputLink value="News_Comment.xhtml" style="float: right" styleClass="ll">
+                                        <f:param name="id_trmethods" value="{trainingmethod.id}"/>
+                                        <h:outputText value="подробней"/>
+                                    </h:outputLink>
+                                    <br></br>
+                                    <h:outputText value="#{trainingmethod.subtext}..." style="float: left" escape="false"/>
+                                    <br></br>
+                                    <p:separator style="width:100%;height:5px" />
+                                </p:column>
+                            </p:dataGrid>
                         </p:tab>
                         <p:tab id="tabdiets" title="Диеты">
-
+                            <p:dataGrid value="#{publMB.lstDiets}" var="diet"  
+                                        paginator="true" 
+                                        paginatorPosition="bottom"
+                                        rows="4" 
+                                        effect="true" columns="1" >
+                                <p:column>
+                                    <strong><h:outputText value="#{diet.title}" style="float: left" /></strong>
+                                    <h:outputLink value="News_Comment.xhtml" style="float: right" styleClass="ll">
+                                        <f:param name="id_diet" value="{diet.id}"/>
+                                        <h:outputText value="подробней"/>
+                                    </h:outputLink>
+                                    <br></br>
+                                    <h:outputText value="#{diet.subtext}..." style="float: left" escape="false"/>
+                                    <br></br>
+                                    <p:separator style="width:100%;height:5px" />
+                                </p:column>
+                            </p:dataGrid>
                         </p:tab>
                     </p:tabView>
                 </h:form>
