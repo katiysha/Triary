@@ -13,9 +13,16 @@
         <div id='container'>
             <div id='header' style=' height:11.6%; background: url(images/main_black_img.jpg); width: 100%;'>
                 <a href="index.xhtml"><img src="images/logo.png" style="left: auto; zoom: 29%"/></a>
-                <h:form style="position: relative; margin-left: 78%; margin-top: -5%; color: white">
-                    <h:outputLabel value="Добро пожаловать, admin" rendered="#{userManagedBean.currentUser == null}" />
-                </h:form>
+                <div style="margin-left: 80%; margin-top: -5%">
+                    <h:outputLabel style="color: white" value="Добро пожаловать: "/><h:outputText style="color: white" value="#{userManagedBean.loginUserName}"/>
+                </div>
+                <div style="margin-left: 80%">
+                    <h:form>
+                        <c:if test="${userManagedBean.currentUser!=null}"> 
+                            <p:commandButton style="font-size: 12px" value="Выйти" action="#{userManagedBean.logout}"/>
+                        </c:if>
+                    </h:form>
+                </div>
             </div>  
             <div id="log" style="width: 100%; height: 8%; background-image: url(images/yellow.jpg); background-repeat: repeat">
                 <h:form id="search_form">
@@ -23,29 +30,33 @@
                     <p:commandButton value="Поиск" id="search_button"/>
                 </h:form>
             </div>
-
             <div id="content" style=" margin-left: 15%; margin-right: 15%;background-image: url(images/.png); background-size: 40%; background-repeat: no-repeat; background-position: right; ">
-                <p:breadCrumb>
-                    <p:menuitem url="index.xhtml" value="Home"/>
-                    <p:menuitem url="news.xhtml" value="Публикации"/>
-                </p:breadCrumb>
-            
                 <h:form id="form">
-                    <p:panel header="Добавить публикацию">
-                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                    <h:outputText value="Тип: " /> 
+                    <p:selectOneRadio id="options" value="#{addpublMB.selectedItem}">  
+                        <f:selectItem itemLabel="Новость" itemValue="NEWS" />  
+                        <f:selectItem itemLabel="Методика тренировок" itemValue="TRAININGMETHOD" />  
+                        <f:selectItem itemLabel="Диета" itemValue="DIET" />  
+                    </p:selectOneRadio>  
+                    <br/>
+                    <h:outputText value="#{addpublMB.selectedItem}"/>
+                    <br/>
+                    <h:outputText value ="Заголовок" style="float: left" />
 
-                            <h:outputText value="Тип публикации: " />
-                            <p:selectOneMenu value="{buttonBean.number}">
-                                <f:selectItem itemLabel="Новости" itemValue="" />
-                                <f:selectItem itemLabel="Методики тренировок" itemValue="1" />
-                                <f:selectItem itemLabel="Диеты" itemValue="2" />
-                            </p:selectOneMenu>
-                        </h:panelGrid>
-                        <h:outputText value="Тема публикации"/><p:spacer width="5"/>
-                        <p:inputText size="50"/><p:spacer height="15"/><br/><br/>
-                        <h:outputText value="Текст публикации"/><p:editor width="800"/>
-                        <p:commandButton value="Добавить"/>
-                    </p:panel>
+                    <p:inputText id="Title" value ="#{addpublMB.currpubl.title}" style="float: left">
+                        <f:validateLength minimum="2" />  
+                    </p:inputText>
+
+                    <br></br>
+                    <br></br>
+                    <h:outputText value ="Текст"   style="float: left"/>
+                    <br></br>
+                    <p:editor value="#{addpublMB.currpubl.text}">
+                        <f:validateLength minimum="2" />  
+                    </p:editor>
+                    <br></br>
+
+                    <p:commandButton  value="Добавить"  action="#{addpublMB.addPubl()}" style="float: right"/>
                 </h:form>
             </div>
         </div>

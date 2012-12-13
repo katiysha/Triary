@@ -19,7 +19,7 @@
                 <div style="margin-left: 80%">
                     <h:form>
                         <c:if test="${userManagedBean.currentUser!=null}"> 
-                            <p:commandButton  value="Выйти" action="#{userManagedBean.logout}"/>
+                            <p:commandButton style="font-size: 12px" value="Выйти" action="#{userManagedBean.logout}"/>
                         </c:if>
                     </h:form>
                 </div>
@@ -34,7 +34,8 @@
                 <h:form id="form">
                     <p:tabView id="tabView" dynamic="true" cache="true" widgetVar="tabs">
 
-                        <p:tab id="tabnews"  title="Новости">
+                        <p:tab id="tabnews" title="Новости">
+                            
                             <p:dataGrid value="#{publMB.lstNews}" var="publication"  
                                         paginator="true" 
                                         paginatorPosition="bottom"
@@ -49,9 +50,21 @@
                                     <br></br>
                                     <h:outputText value="#{publication.subtext}..." style="float: left" escape="false"/>
                                     <br></br>
+                                    <c:if test="${publMB.admin}">
+                                        <p:button image="ui-icon-pencil" title="Редактировать" style="float: right">
+                                            <f:param name="idnew" value="#{publication.id}"/>
+                                        </p:button>
+                                        <p:commandButton title="Удалить" ajax="false" update="@form" image="ui-icon-trash" action="#{publMB.delNews()}" style="float: right; padding-right: 10px">
+                                            <f:setPropertyActionListener target="#{publMB.id_pub}" value="#{publication.id}"/>
+                                        </p:commandButton>
+                                    </c:if>
                                     <p:separator style="width:100%;height:5px" />
                                 </p:column>
                             </p:dataGrid>
+                            <c:if test="${publMB.admin}">
+                                <p:button title="Добавить" outcome="addpubl" value="Добавить новость" image="ui-icon-plus" style="float: right"/>
+                            </c:if>
+                            <br/>
                         </p:tab>
                         <p:tab id="tabtrmethods" title="Методики тренировок">
                             <p:dataGrid value="#{publMB.lstTrainingMethods}" var="trainingmethod"  
@@ -90,6 +103,12 @@
                                     <p:separator style="width:100%;height:5px" />
                                 </p:column>
                             </p:dataGrid>
+                            <p:dialog header="Удаление" widgetVar="confirmation" modal="true" resizable="false"> 
+                                <h:outputText id="id_sure" value="Вы уверены что хотите удалить новость?"/>
+                                <p:commandButton value="Да" ajax="true" actionListener="#{publMB.delNews}" update="@form" onclick="confirmation.hide()"/>
+
+                                <p:commandButton value="Отмена" onclick="confirmation.hide()" type="button" />                    
+                            </p:dialog>
                         </p:tab>
                     </p:tabView>
                 </h:form>
