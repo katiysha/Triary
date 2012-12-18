@@ -1,0 +1,155 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">  
+
+    <h:head>  
+
+    </h:head>  
+
+    <h:body>
+        <div id='container'>
+            <div id='header' style=' height:11.6%; background: url(images/main_black_img.jpg); width: 100%;'>
+                <a href="index.xhtml"><img src="images/logo.png" style="left: auto; zoom: 23%"/></a>
+                <div style="margin-left: 80%; margin-top: -6%">
+                    <h:outputLabel style="color: white" value="Добро пожаловать: "/><h:outputLink value="userprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText style="color: white" value="#{userManagedBean.loginUserName}"/></h:outputLink>
+                </div>
+                <div style="margin-left: 80%">
+                    <h:form>
+                        <c:if test="${userManagedBean.currentUser!=null}"> 
+                            <p:commandButton style="font-size: 12px" value="Выйти" action="#{userManagedBean.logout}"/>
+                        </c:if>
+                        <c:if test="${userManagedBean.currentUser==null}"> 
+                            <p:commandButton ajax="false" value="Войти" style="font-size: 12px" action="Login.xhtml?faces-redirect=true" />
+                        </c:if>
+                    </h:form>
+                </div>
+            </div>  
+            <div id="log" style="width: 100%; height: 8%; background-image: url(images/yellow.jpg); background-repeat: repeat">
+                <h:form id="search_form">
+                    <p:inputText style="width: 50%; margin-top: 10px; margin-left: 20%"/>
+                    <p:commandButton style="font-size: 12px" value="Поиск" id="search_button"/>
+                </h:form>
+            </div>
+            <div id="content" style=" margin-left: 15%; margin-right: 15%;background-image: url(images/.png); background-size: 40%; background-repeat: no-repeat; background-position: right; ">
+                <h:form id="form">
+                    <p:tabView id="tabView" dynamic="true" cache="true" widgetVar="tabs">
+
+                        <p:tab id="tabnews" title="Новости">
+                            
+                            <p:dataGrid value="#{publMB.lstNews}" var="publication"  
+                                        paginator="true" 
+                                        paginatorPosition="bottom"
+                                        rows="4" 
+                                        effect="true" columns="1" >
+                                <p:column>
+                                    <strong><h:outputText value="#{publication.title}" style="float: left" /></strong>
+                                    <h:outputLink value="comment_news.xhtml" style="float: right">
+                                        <f:param name="id_news" value="#{publication.id}"/>
+                                        <h:outputText value="подробней"/>
+                                    </h:outputLink>
+                                    <br></br>
+                                    <h:outputText value="#{publication.subtext}..." style="float: left" escape="false"/>
+                                    <br></br>
+                                    <c:if test="${publMB.admin}">
+                                        <p:button image="ui-icon-pencil" outcome="updatepubl" title="Редактировать" style="float: right">
+                                            <f:param name="idpubl" value="#{publication.id}"/>
+                                        </p:button>
+                                        <p:commandButton title="Удалить" ajax="false" update="@form" image="ui-icon-trash" action="#{publMB.delNews()}" style="float: right; padding-right: 10px">
+                                            <f:setPropertyActionListener target="#{publMB.id_pub}" value="#{publication.id}"/>
+                                        </p:commandButton>
+                                    </c:if>
+                                    <p:separator style="width:100%;height:5px" />
+                                </p:column>
+                            </p:dataGrid>
+                            <c:if test="${publMB.admin}">
+                                <p:button title="Добавить" outcome="addpubl" value="Добавить публикацию" image="ui-icon-plus" style="float: right"/>
+                            </c:if>
+                            <br/>
+                        </p:tab>
+                        <p:tab id="tabtrmethods" title="Методики тренировок">
+                            <p:dataGrid value="#{publMB.lstTrainingMethods}" var="trainingmethod"  
+                                        paginator="true" 
+                                        paginatorPosition="bottom"
+                                        rows="4" 
+                                        effect="true" columns="1" >
+                                <p:column>
+                                    <strong><h:outputText value="#{trainingmethod.title}" style="float: left" /></strong>
+                                    <h:outputLink value="comment_news.xhtml" style="float: right" styleClass="ll">
+                                        <f:param name="id_news" value="#{trainingmethod.id}"/>
+                                        <h:outputText value="подробней"/>
+                                    </h:outputLink>
+                                    <br></br>
+                                    <h:outputText value="#{trainingmethod.subtext}..." style="float: left" escape="false"/>
+                                    <br></br>
+                                    <c:if test="${publMB.admin}">
+                                        <p:button image="ui-icon-pencil" outcome="updatepubl" title="Редактировать" style="float: right">
+                                            <f:param name="idpubl" value="#{trainingmethod.id}"/>
+                                        </p:button>
+                                        <p:commandButton title="Удалить" ajax="false" update="@form" image="ui-icon-trash" action="#{publMB.delNews()}" style="float: right; padding-right: 10px">
+                                            <f:setPropertyActionListener target="#{publMB.id_pub}" value="#{publication.id}"/>
+                                        </p:commandButton>
+                                    </c:if>
+                                    <p:separator style="width:100%;height:5px" />
+                                </p:column>
+                            </p:dataGrid>
+                            <c:if test="${publMB.admin}">
+                                <p:button title="Добавить" outcome="addpubl" value="Добавить публикацию" image="ui-icon-plus" style="float: right"/>
+                            </c:if>
+                            <br/>
+                        </p:tab>
+                        <p:tab id="tabdiets" title="Диеты">
+                            <p:dataGrid value="#{publMB.lstDiets}" var="diet"  
+                                        paginator="true" 
+                                        paginatorPosition="bottom"
+                                        rows="4" 
+                                        effect="true" columns="1">
+                                <p:column>
+                                    <strong><h:outputText value="#{diet.title}" style="float: left" /></strong>
+                                    <h:outputLink value="comment_news.xhtml" style="float: right" styleClass="ll">
+                                        <f:param name="id_news" value="#{diet.id}"/>
+                                        <h:outputText value="подробней"/>
+                                    </h:outputLink>
+                                    <br></br>
+                                    <h:outputText value="#{diet.subtext}..." style="float: left" escape="false"/>
+                                    <br></br>
+                                    <c:if test="${publMB.admin}">
+                                        <p:button image="ui-icon-pencil" outcome="updatepubl" title="Редактировать" style="float: right">
+                                            <f:param name="idpubl" value="#{diet.id}"/>
+                                        </p:button>
+                                        <p:commandButton title="Удалить" ajax="false" update="@form" image="ui-icon-trash" action="#{publMB.delNews()}" style="float: right; padding-right: 10px">
+                                            <f:setPropertyActionListener target="#{publMB.id_pub}" value="#{publication.id}"/>
+                                        </p:commandButton>
+                                    </c:if>
+                                    <p:separator style="width:100%;height:5px" />
+                                </p:column>
+                            </p:dataGrid>
+                            <p:dialog header="Удаление" widgetVar="confirmation" modal="true" resizable="false"> 
+                                <h:outputText id="id_sure" value="Вы уверены что хотите удалить новость?"/>
+                                <p:commandButton value="Да" ajax="true" actionListener="#{publMB.delNews}" update="@form" onclick="confirmation.hide()"/>
+
+                                <p:commandButton value="Отмена" onclick="confirmation.hide()" type="button" />                    
+                            </p:dialog>
+                            <c:if test="${publMB.admin}">
+                                <p:button title="Добавить" outcome="addpubl" value="Добавить публикацию" image="ui-icon-plus" style="float: right"/>
+                            </c:if>
+                            <br/>
+                        </p:tab>
+                    </p:tabView>
+                </h:form>
+            </div>
+        </div>
+        <p style="text-align: center">
+            <a href="#">О нас</a>
+            <p:spacer width="10px"/>
+            <a href="#">Пожаловаться</a>
+            <p:spacer width="10px"/>
+            <a href="#">Twitter</a>
+            <p:spacer width="10px"/>
+            <a href="#">Facebook</a>
+        </p>
+    </h:body>
+
+</html>  

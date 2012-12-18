@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">  
+
+    <h:head>  
+
+    </h:head>  
+
+    <h:body>
+        <div id='container'>
+            <div id='header' style=' height:11.6%; background: url(images/main_black_img.jpg); width: 100%;'>
+                <a href="index.xhtml"><img src="images/logo.png" style="left: auto; zoom: 23%"/></a>
+                <div style="margin-left: 80%; margin-top: -6%">
+                    <h:outputLabel style="color: white" value="Добро пожаловать: "/><h:outputLink value="userprofile.xhtml"><f:param name="id_user" value="#{userManagedBean.currentUser.id}"/><h:outputText style="color: white" value="#{userManagedBean.loginUserName}"/></h:outputLink>
+                </div>
+                <div style="margin-left: 80%">
+                    <h:form>
+                        <c:if test="${userManagedBean.currentUser!=null}"> 
+                            <p:commandButton style="font-size: 12px" value="Выйти" action="#{userManagedBean.logout}"/>
+                        </c:if>
+                        <c:if test="${userManagedBean.currentUser==null}"> 
+                            <p:commandButton ajax="false" value="Войти" style="font-size: 12px" action="Login.xhtml?faces-redirect=true" />
+                        </c:if>
+                    </h:form>
+                </div>
+            </div>  
+            <div id="log" style="width: 100%; height: 8%; background-image: url(images/yellow.jpg); background-repeat: repeat">
+                <h:form id="search_form">
+                    <p:inputText style="width: 50%; margin-top: 10px; margin-left: 20%"/>
+                    <p:commandButton style="font-size: 12px" value="Поиск" id="search_button"/>
+                </h:form>
+            </div>
+            <div id="content" style=" margin-left: 5%; margin-right: 35%;background-image: url(images/.png); background-size: 40%; background-repeat: no-repeat; background-position: right; ">
+                <p:breadCrumb>
+                    <p:menuitem url="index.xhtml" value="Home"/>
+                    <p:menuitem url="news.xhtml" value="Публикации"/>
+                    <p:menuitem url="#" value="Статистика"/>
+                    <p:menuitem url="galeria.xhtml" value="Галерея"/>
+                    <p:menuitem url="#" value="Дневник"/>
+                </p:breadCrumb>
+                <h:form id="form">
+                    <p:accordionPanel var="profile" value=""
+                        <p:fieldset legend="Моя тренировочная программа">  
+                            <h:panelGrid  cellpadding="10">  
+                                <h:outputText value="#{profileMB.curprofile.ration}" />  
+                                <p:inplace editor="true" id="basic">  
+                                    <p:inputTextarea value="#{profileMB.curprofile.ration}" rows="6" cols="33"/>  
+                                </p:inplace>
+                            </h:panelGrid>  
+                        </p:fieldset>  
+
+                        <p:fieldset legend="Моя Диета">  
+                            <h:panelGrid  cellpadding="10">  
+
+                                <h:outputText  
+                                    value="Большинство современных диет, применяемых в бодибилдинге, не совсем правильны. Это связано с тем, что каждый автор, создавая свою собственную диету, пытается изобрести что-то новое, однако в 99% случаев эти инновации совершенно бесполезны, а иногда даже вредны. Изощренные методы циклирования, предпочтение каких-то специфических продуктов питания, сложность в приготовлении продуктов, нелепые сочетания, все это может говорить о том, что автор попытался привнести в диетологию бодибилдинга что-то новое, однако на деле ничего не получилось. Если вам советуют питаться хреном с чесноком, есть только узкий спектр продуктов, например, овощи, имеющие фиолетовую окраску и т.п., можете смело закрывать эту книгу или статью." />  
+                            </h:panelGrid>  
+                        </p:fieldset>  
+                        <p:fieldset legend="Мои параметры">  
+                            <h:panelGrid  cellpadding="10">  
+
+                                <h:outputText value="Вес" />  
+                                <h:outputText value="Рост" />  
+                            </h:panelGrid>  
+                        </p:fieldset> <h:panelGrid  style="margin-bottom:10px" cellpadding="5">
+
+                            <f:facet name="footer">  
+
+
+
+
+
+
+                            </f:facet>  
+                        </h:panelGrid>
+
+                    
+                </h:form>
+            </div>
+
+
+
+        </div>
+        <p style="text-align: center">
+            <a href="#">О нас</a>
+            <p:spacer width="10px"/>
+            <a href="#">Пожаловаться</a>
+            <p:spacer width="10px"/>
+            <a href="#">Twitter</a>
+            <p:spacer width="10px"/>
+            <a href="#">Facebook</a>
+        </p> 
+<!--        <div id="about" style=" margin-left: 68%; margin-top: -115%" >
+
+
+            <br><p:fieldset legend="тутачки будет имя юзера">  
+
+                    <h:panelGrid  cellpadding="10">  
+
+                        <h:outputText value="" />  
+                    </h:panelGrid>  
+                </p:fieldset> </br>
+
+            <br><p:fieldset legend="Информация">  
+
+                    <h:panelGrid  cellpadding="10">  
+
+                        <h:outputText  
+                            value="тутачки будет инфрмация из базы" />  
+                    </h:panelGrid>  
+                </p:fieldset> </br>
+
+            <p:calendar mode="inline" id="inlineCal"/>
+        </div>-->
+    </h:body>
+
+</html>  
+

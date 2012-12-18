@@ -1,0 +1,64 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">  
+
+    <h:head>  
+
+    </h:head>  
+
+    <h:body>
+        <div id='container'>
+            <div id='header' style=' height:11.6%; background: url(images/main_black_img.jpg); width: 100%;'>
+                <a href="index.xhtml"><img src="images/logo.png" style="left: auto; zoom: 29%"/></a>
+                <div style="margin-left: 80%; margin-top: -5%">
+                    <h:outputLabel style="color: white" value="Добро пожаловать: "/><h:outputText style="color: white" value="#{userManagedBean.loginUserName}"/>
+                </div>
+                <div style="margin-left: 80%">
+                    <h:form>
+                        <c:if test="${userManagedBean.currentUser!=null}"> 
+                            <p:commandButton style="font-size: 12px" value="Выйти" action="#{userManagedBean.logout}"/>
+                        </c:if>
+                    </h:form>
+                </div>
+            </div>  
+            <div id="log" style="width: 100%; height: 8%; background-image: url(images/yellow.jpg); background-repeat: repeat">
+                <h:form id="search_form">
+                    <p:inputText style="width: 50%; margin-top: 10px; margin-left: 20%"/>
+                    <p:commandButton value="Поиск" id="search_button"/>
+                </h:form>
+            </div>
+            <div id="content" style=" margin-left: 15%; margin-right: 15%;background-image: url(images/.png); background-size: 40%; background-repeat: no-repeat; background-position: right; ">
+                <h:form id="form" prependId="false">
+                    <h:outputText value ="Заголовок" style="float: left" />
+                    <p:inputText id="Title" value ="#{updatemb.updatePubl.title}" style="float: left">
+                        <!--                                                 <f:validateLength minimum="2" />  -->
+                    </p:inputText>
+
+                    <br></br>
+                    <br></br>
+                    <h:outputText value ="Текст"   style="float: left"/>
+                    <br></br>
+                    <p:editor value="#{updatemb.updatePubl.text}">
+                        <!--                                                 <f:validateLength minimum="2" />  -->
+                    </p:editor>
+                    <br></br>
+
+                    <h:commandButton value="Изменить новость"  action="#{updatemb.updateNews()}" style="float: right"></h:commandButton>
+                </h:form>
+            </div>
+        </div>
+        <p style="text-align: center">
+            <a href="#">О нас</a>
+            <p:spacer width="10px"/>
+            <a href="#">Пожаловаться</a>
+            <p:spacer width="10px"/>
+            <a href="#">Twitter</a>
+            <p:spacer width="10px"/>
+            <a href="#">Facebook</a>
+        </p>
+    </h:body>
+
+</html>  
