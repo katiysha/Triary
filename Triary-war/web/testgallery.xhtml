@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+    </head>
+    <body>
+        <div>
+             <h:panelGrid columns="2">  
+    <p:lineChart value="#{chartBean.linearModel}" legendPosition="e" zoom="true" animate="true"  
+                title="Linear Chart" minY="0" maxY="10" style="width:400px;" widgetVar="chart"/>  
+  
+    <p:barChart id="basic" value="#{chartBean.categoryModel}" legendPosition="ne"  
+                title="Basic Bar Chart" min="0" max="200" style="width:400px" animate="true"/>  
+</h:panelGrid>  
+        </div>
+    </body>
+</html>
